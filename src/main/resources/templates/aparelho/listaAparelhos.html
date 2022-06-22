@@ -1,0 +1,120 @@
+<!doctype html>
+<html xmlns:th="http://thymeleaf.org">
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Projeto Loja</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1" style="font-weight: bold;">Solução Eletrônica</span>
+            <form class="d-flex" style="margin-right: 5%">
+                <div class="dropdown" style="margin-right: 5%">
+                    <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                       data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                        Opções
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/novoCliente">Novo Cliente</a></li>
+                        <li><a class="dropdown-item" href="/novoFuncionario">Novo Funcionário</a></li>
+                        <li><a class="dropdown-item" href="/novaOrdemServico">Nova Ordem de Serviço</a></li>
+                    </ul>
+                </div>
+                <div style="margin-top: 3%">
+                    <a href="/logout" data-bs-toggle="tooltip" data-bs-placement="top" title="Logout" style="color: black"><span class="material-symbols-outlined">logout</span></a>
+                </div>
+            </form>
+        </div>
+    </nav>
+</header>
+
+<section>
+
+    <form class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="background-color: white; padding-left: 0px;">
+                <li class="breadcrumb-item"><a href="/listarClientes">Clientes</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Aparelhos</li>
+            </ol>
+        </nav>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Marca</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">N° Série</th>
+                <th scope="col">Nome Cliente</th>
+                <th scope="col" style="text-align: center">Defeito</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="aparelho : ${listaAparelhos}">
+                <td><span th:text="${aparelho.marcaAparelho}"></span></td>
+                <td><span th:text="${aparelho.modeloAparelho}"></span></td>
+                <td><span th:text="${aparelho.numeroSerie}"></span></td>
+                <td><span th:text="${aparelho.cliente.nomeCliente}"></span></td>
+                <td style="text-align: center"><a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" th:data-parameter1="${aparelho.descricaoDefeito}" th:data-parameter2="${aparelho.nomeAparelho}" th:onclick="showFunctionModal(this.getAttribute('data-parameter1'), this.getAttribute('data-parameter2'))"><i class="material-icons">visibility</i></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" id="message-text" disabled></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+        <script>
+            function showFunctionModal(defeito, nomeAparelho) {
+
+                        defeito=defeito.replace('<p>','')
+                        defeito=defeito.replace('</p>','')
+
+                        var exampleModal = document.getElementById('exampleModal');
+                        exampleModal.addEventListener('show.bs.modal', function (event) {
+                          // Button that triggered the modal
+                          var button = event.relatedTarget
+                          // Update the modal's content.
+                          var modalTitle = exampleModal.querySelector('.modal-title')
+                          var modalBodyInput = exampleModal.querySelector('.modal-body textarea')
+                          modalTitle.textContent = 'Defeito - ' + nomeAparelho;
+                          modalBodyInput.value = defeito;
+                        });
+                   }
+      	</script>
+
+</body>
+
+</html>

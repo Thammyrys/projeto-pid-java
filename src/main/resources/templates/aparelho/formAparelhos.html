@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Loja Eletrônica</title>
+    <meta charset="UTF-8">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+      <link rel="stylesheet" type="text/css" href="aparelho.css" media="screen" />
+    <!--<link rel="stylesheet" href="style/styleCss.css"/>-->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+
+</head>
+
+<body>
+<header>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1" style="font-weight: bold;">Solução Eletrônica</span>
+            <form class="d-flex">
+                <div class="dropdown" style="margin-right: 5%">
+                    <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                       data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                        Opções
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/novoCliente">Novo Cliente</a></li>
+                        <li><a class="dropdown-item" href="/novoFuncionario">Novo Funcionário</a></li>
+                        <li><a class="dropdown-item" href="/novaOrdemServico">Nova Ordem de Serviço</a></li>
+                    </ul>
+                </div>
+                <div style="margin-top: 3%">
+                    <a href="/logout" data-bs-toggle="tooltip" data-bs-placement="top" title="Logout" style="color: black"><span class="material-symbols-outlined">logout</span></a>
+                </div>
+            </form>
+        </div>
+    </nav>
+</header>
+
+<section>
+    <div class="container cadastro-aparelho">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="background-color: white; padding-left: 0px;">
+                <li class="breadcrumb-item"><a href="/listarClientes">Clientes</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Novo Aparelho</li>
+            </ol>
+        </nav>
+        <div class="container">
+            <th:block th:include="mensagemValidacao"></th:block>
+            <form th:action="@{/cadastrarAparelhos}" method="post">
+                <fieldset class="border p-3">
+                    <legend class="float-none w-auto p-2">Dados Aparelho</legend>
+                    <div class="form-cliente">
+                        <div class="form-group mb-3">
+                            <label for="formInputNumOs" class="form-label">N° Ordem de Serviço</label>
+                            <input type="text" id="formInputNumOs" class="form-control" name="numOrdemServico"
+                                   th:value="${ordemServico.id}" placeholder="Nome Aparelho *" readonly>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="formInputCliente" class="form-label">Cliente</label>
+                            <input type="text" id="formInputCliente" class="form-control" name="cliente"
+                                   th:value="${ordemServico.cliente.nomeCliente}" readonly>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="formInputAtendente" class="form-label">Atendente</label>
+                            <input type="text" id="formInputAtendente" class="form-control" name="atendente"
+                                   th:value="${ordemServico.funcionario.nomeFunc}" readonly>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="formInputNomeAparelho" class="form-label">Nome do Aparelho</label>
+                            <input type="text" id="formInputNomeAparelho" class="form-control" name="nomeAparelho"
+                                   placeholder="Nome Aparelho *">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="formInputMarcaAparelho" class="form-label">Marca do Aparelho</label>
+                            <input type="text" id="formInputMarcaAparelho" class="form-control" name="marcaAparelho"
+                                   placeholder="Marca *">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="formInputModeloAparelho" class="form-label">Modelo do Aparelho</label>
+                            <input type="text" id="formInputModeloAparelho" class="form-control" name="modeloAparelho"
+                                   placeholder="Modelo *">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="formInputNumeroSerie" class="form-label">Número de Série do Aparelho</label>
+                            <input type="text" id="formInputNumeroSerie" class="form-control" name="numeroSerie"
+                                   placeholder="N° Série *">
+                        </div>
+
+                        <textarea id="summernote" type="text" class="form-control" name="descricaoDefeito"
+                                  placeholder="Descrição Defeito *"></textarea>
+
+                        <small class="form-text text-muted mb-3">(*) Campos obrigatórios</small>
+                    </div>
+                </fieldset>
+
+
+                <div class="d-flex flex-row-reverse bd-highlight">
+                    <div>
+                        <button type="submit" class="btn btn-success float-right" style="margin-top: 10px;"><i
+                                class="material-icons color: white">add</i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+        crossorigin="anonymous"></script>
+<script>
+      $('#summernote').summernote({
+          placeholder: 'Texto *',
+          tabsize: 2,
+          height: 300
+      });
+
+
+</script>
+
+</body>
+</html>

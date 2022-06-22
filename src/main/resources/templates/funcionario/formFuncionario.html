@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Solução Eletrônica</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <span class="navbar-brand mb-0 h1" style="font-weight: bold;">Solução Eletrônica</span>
+                <form class="d-flex" style="margin-right: 5%">
+                    <div class="dropdown" style="margin-right: 5%">
+                        <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                           data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                            Opções
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/novoCliente">Novo Cliente</a></li>
+                            <li><a class="dropdown-item" href="/novoFuncionario">Novo Funcionário</a></li>
+                            <li><a class="dropdown-item" href="/novaOrdemServico">Nova Ordem de Serviço</a></li>
+                        </ul>
+                    </div>
+                    <div style="margin-top: 3%">
+                        <a href="/logout" data-bs-toggle="tooltip" data-bs-placement="top" title="Logout" style="color: black"><span class="material-symbols-outlined">logout</span></a>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+    <section>
+        <div class="container"  style="width: 70%;">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" style="background-color: white; padding-left: 0px;">
+                    <li class="breadcrumb-item"><a href="/listarClientes">Clientes</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Listar Aparelhos</li>
+                </ol>
+            </nav>
+            <div>
+                <th:block th:include="mensagemValidacao"></th:block>
+                <form method="post">
+                    <div class="container">
+                        <div class="mb-3">
+                            <label for="formGroupNome" class="form-label">Nome:</label>
+                            <input type="text" class="form-control" id="formGroupNome" name="nomeFunc" placeholder="Nome *">
+                        </div>
+
+                        <div class="row ">
+                            <div class="col-md-3 mb-3">
+                                <label for="formGroupCep" class="form-label">CEP:</label>
+                                <input type="text" class="form-control" id="formGroupCep" name="cepFunc" oninput="$(this).mask('00.000-000')" placeholder="CEP *">
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label for="formGroupTelefone" class="form-label">Telefone:</label>
+                                <input type="text" class="form-control" id="formGroupTelefone" name="telefoneFunc" oninput="$(this).mask('0000-00000')" placeholder="Telefone *">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="formGroupEndereco" class="form-label">Endereço:</label>
+                            <input type="text" class="form-control" id="formGroupEndereco" name="enderecoFunc" placeholder="Endereço *">
+                        </div>
+                    </div>
+
+                    <small class="form-text text-muted">(*) Campos obrigatórios</small>
+
+                    <div class="row mb-6">
+                        <div class="col-sm-4">
+                            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Cadastrar</button>
+                            <a href="/listarClientes" class="btn btn-light" role="button" style="margin-top: 10px;">Cancelar</a>
+                            <!--<button type="submit" class="btn" style="margin-top: 10px;">Cancelar</button>-->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </section>
+</body>
+</html>
