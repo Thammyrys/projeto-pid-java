@@ -21,8 +21,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] AUTH_LIST = {
 //            "/",
-//            "/posts",
-//            "/posts/{id}"
     };
 
     @Override
@@ -36,8 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-//        auth.inMemoryAuthentication()
-//                .withUser("thammyrys.campos").password("{noop}123").roles("ADMIN");
         auth.userDetailsService(inMemoryUserDetailsManager());
     }
 
